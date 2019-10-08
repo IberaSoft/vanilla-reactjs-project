@@ -4,12 +4,7 @@ Create React Project without create-react-app
 
 > Step by step guide to start a simple ReactJS project
 
-[![License](http://img.shields.io/:license-mit-blue.svg?style=flat)](http://badges.mit-license.org)
-
-## Prerequisites
-
-- [NodeJS](https://nodejs.org/en/download/) v4.2.4 or greater is installed, and `node` and `npm` are available on the PATH environment variable.
-- [Git](https://git-scm.com/) v2.6.4 or greater is installed, and is available on the PATH environment variable.
+[![License](https://github.com/IberaSoft/vanilla-reactjs-project/blob/master/LICENSE)](http://badges.mit-license.org)
 
 ## Quick Start
 
@@ -26,7 +21,7 @@ cd vanilla-reactjs-project
 rm -rf .git
 ```
 
-3- Install all of the node dependencies and bower packages required by the project.
+3- Install all of the node dependencies and packages required by the project.
 
 ```
 npm i
@@ -64,8 +59,10 @@ vim .gitignore
 ```
 Possible items you need in your gitignore file are:
 node_modules
-.DS_Store     # If you're on mac machine
-dist          # Distribution folder
+.DS_Store/     # If you're on mac machine
+.vscode/       # If you IDE is vscode
+node_modules   # Folder with all dependencies
+dist           # Distribution folder
 
 Create app folder
 ```
@@ -74,7 +71,7 @@ mkdir app
 
 Create 3 files within it
 ```
-touch index.html index.js index.css
+cd app && touch index.html index.js index.css
 ```
 
 Open index.html and copy paste the following code:
@@ -94,15 +91,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
-class App extends React.Component {
-    render(){
-        return(
-            <div>Hello World</div>
-        )
-    }
-}
+const App = () => <div>Hello World!</div>
 
-ReactDOM.render(<App />, document.getElementById('app'))
+ReactDOM.render( < App / > , document.getElementById('app'))
 ```
 
 > At this point, if you try to run the code above, it will give an error as that code is written in JSX and the browser does not understand it. To solve that, we will need install some dependencies...
@@ -119,7 +110,7 @@ npm install --save-dev @babel/core @babel/preset-env @babel/preset-react webpack
 Webpack is module bundler. So currently we only have on module. However, as our app expands we will have more modules. So webpack intelligently bind all those modules together and creates one single file which serves all these.
 
 ```
-touch webpack.config.js
+cd .. && touch webpack.config.js
 ```
 
 And copy the following code:
@@ -150,7 +141,7 @@ module.exports = {
 }
 ```
 
-In conjuction with out babel-loader works we have to add babel preset config to our package.json file
+In conjuction with out babel-loader works we have to add babel preset config to our ***package.json*** file
 
 ```
 "main": "index.js",
@@ -162,7 +153,7 @@ In conjuction with out babel-loader works we have to add babel preset config to 
   }
 ```
 
-To run the build we have to add webpack to our script tag in our package.json
+To run the build we have to add webpack to our script tag in our ***package.json***
 
 ```
 "main": "index.js",
@@ -177,12 +168,14 @@ To run the build we have to add webpack to our script tag in our package.json
   },
 ```
 
-So when i run npm run create from terminal it will run the webpack which will create the dist folder and our bundle file with index.html file.
+So when you run ***npm run create*** from terminal it will run the webpack which will create the dist folder and our bundle file with index.html file.
 
-It's hassle to run webpack every time. So you can start a webpack dev server. so it will start build your code as soon as you run it. modify your script in package.json with following
+It's hassle to run webpack every time. So you can start a webpack dev server. so it will start build your code as soon as you run it.
+Modify your script in package.json with following:
 
 ```
 "scripts": {
+    "create": "webpack",
     "start": "webpack-dev-server --open"
   }
 ```
